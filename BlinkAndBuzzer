@@ -1,0 +1,17 @@
+int led=42;
+int buzer=06;
+void setup() {
+  // put your setup code here, to run once:
+pinMode(led,OUTPUT);
+pinMode(buzer,OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+digitalWrite(led,HIGH);
+digitalWrite(buzer,HIGH);
+delay(1000);
+digitalWrite(led,LOW);
+digitalWrite(buzer,LOW);
+delay(1000);
+}
