@@ -2,11 +2,11 @@
 #include <HTTPClient.h>
 
 // WiFi Credentials
-const char* ssid = "Archana";
-const char* password = "archanasm";
+const char* ssid = "wifi name";
+const char* password = "password";
 
 // Server URL
-const char* serverName = "http://192.168.119.167:3000/api/log"; // Replace with your Node.js server IP
+const char* serverName = "http://192.168.119.*.*/api/log"; // Replace with your Node.js server IP
 
 const int ledPin = 42; // Pin for the LED
 
@@ -68,3 +68,34 @@ void loop() {
 
   delay(5000); // Wait 5 seconds before sending the next request
 }
+
+
+
+
+SERVER.JS (NODE JS PAGE)
+
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const PORT = 3000;
+
+// Middleware to parse JSON requests
+app.use(bodyParser.json());
+
+// Route to log received data
+app.post('/api/log', (req, res) => {
+    const { randomNumber, ledState } = req.body;
+
+    // Print received data to the console
+    console.log(`Received Data: Random Number = ${randomNumber}, LED State = ${ledState}`);
+
+    // Respond back
+    res.status(200).json({ status: 'success', message: 'Data received successfully' });
+});
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+
